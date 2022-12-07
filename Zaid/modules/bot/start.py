@@ -4,7 +4,7 @@ from pyrogram import filters
 
 @app.on_message(filters.command("start") & filters.private)
 async def start(client, message):
-   await message.reply_text("Hey Zaid Userbot Assistant here")
+   await message.reply_text("Hey ALBY PYROBOT Assistant here")
 
 @app.on_message(filters.command("start") & filters.private)
 async def start(_, message):
