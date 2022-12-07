@@ -1,5 +1,6 @@
 from Zaid import app
 from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 
 @app.on_message(filters.command("start") & filters.private)
