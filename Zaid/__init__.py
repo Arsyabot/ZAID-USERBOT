@@ -38,6 +38,8 @@ app = Client(
     in_memory=True,
 )
 
+robot = Client(":memory:", API_ID, API_HASH, bot_token=BOT_TOKEN)
+
 if STRING_SESSION1:
    print("Client1: Found.. Starting..📳")
    client1 = Client(name="one", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION1, plugins=dict(root="Zaid/modules"))
