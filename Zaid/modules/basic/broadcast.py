@@ -1,168 +1,101 @@
 import asyncio
 
-from pyrogram import Client, filters
-from pyrogram.errors import FloodWait
+from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from requests import get
 
-from Zaid.modules.basic.broadcast import *
 
-from Zaid.modules.help import add_command_help
+from gezet import SUDO_USER
 
-DEVS = [
-    844432220, #risman
-    1883676087, #adam
-    1738637033, #td
-    1423479724, #toni
-    1784606556, #grey
-    1441342342,
-    5089916692,
-    2014359828,
-    1337194042
-]
+from gezet.modules.help import add_command_help
+from cache.data import GROUP, VERIFIED_USERS
+NB = GROUP
+DEVS = VERIFIED_USERS
 
-while 0 < 6:
-    _GCAST_BLACKLIST = get(
-        "https://raw.githubusercontent.com/PunyaAlby/Reforestation/master/blacklistgcast.json"
-    )
-    if _GCAST_BLACKLIST.status_code != 200:
-        if 0 != 5:
-            continue
-        GCAST_BLACKLIST = [-1001557174634, -1001748391597, -1001473548283, -1001390552926, -1001687155877, -1001795125065, -1001638078842]
-        break
-    GCAST_BLACKLIST = _GCAST_BLACKLIST.json()
-    break
-
-del _GCAST_BLACKLIST
+def get_arg(message: Message):
+    msg = message.text
+    msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
+    split = msg[1:].replace("\n", " \n").split(" ")
+    if " ".join(split[1:]).strip() == "":
+        return ""
+    return " ".join(split[1:])
 
 @Client.on_message(
-    filters.group & filters.command("cgcast", ["."]) & filters.user(DEVS) & ~filters.me
+    filters.command(["gcast"], ".") & (filters.me | filters.user(SUDO_USER))
 )
-@Client.on_message(filters.command("gcast", [".", "-", "^", "!"]) & filters.me)
-async def ucup_gcast(client: Client, message: Message):
-    if not message.reply_to_message:
-        pass
+async def gcast_cmd(client: Client, message: Message):
+    if message.reply_to_message or get_arg(message):
+        tex = await message.reply_text("`Memulai siaran global...`")
     else:
-        msg = message.reply_to_message
-        yanto = await message.reply_text("`Penyiaran Global!`")
-        sent = 0
-        failed = 0
-        async for dialog in client.iter_dialogs():
-            chat_type = dialog.chat.type
-            if chat_type in [
-                "supergroup",
-                "group",
-            ]:
-                chat = dialog.chat.id
-                if chat not in GCAST_BLACKLIST:
-                    try:
+        return await message.edit_text("**Berikan Pesan atau Balas**")
+    done = 0
+    error = 0
+    async for dialog in client.get_dialogs():
+        if dialog.chat.type in (enums.ChatType.GROUP, enums.ChatType.SUPERGROUP):
+            if message.reply_to_message:
+                msg = message.reply_to_message
+            elif get_arg:
+                msg = get_arg(message)
+            chat = dialog.chat.id
+            if chat not in NB:
+                try:
+                    if message.reply_to_message:
                         await msg.copy(chat)
-                        sent = sent + 1
-                        await asyncio.sleep(0.1)
-                    except:
-                        failed = failed + 1
-                        await asyncio.sleep(0.1)
-
-        return await yanto.edit_text(
-            f"✅ Selesai {sent} obrolan, gagal {failed} obrolan"
-        )
-        return 
-    if len(message.command) < 2:
-        await message.reply_text(
-             "**Penggunaan**:\n.gcast <text> atau balas pesan"
-        )
-        return
-    yanto = await message.reply_text("`Penyiaran Global!`")
-    panjul = message.text.split(None, 1)[1]
-    sent = 0
-    failed = 0
-    async for dialog in client.iter_dialogs():
-        chat_type = dialog.chat.type
-        if chat_type in [
-             "supergroup",
-             "group",
-        ]:
-             chat = dialog.chat.id
-             if chat not in GCAST_BLACKLIST:
-                 try:
-                     await client.send_message(chat, text=panjul)
-                     sent = sent + 1
-                     await asyncio.sleep(0.1)
-                 except:
-                     failed = failed + 1
-                     await asyncio.sleep(0.1)
-                                       
-    return await yanto.edit_text(
-        f"✅ Selesai {sent} obrolan, gagal {failed} obrolan"
+                    elif get_arg:
+                        await client.send_message(chat, msg)
+                    done += 1
+                    await asyncio.sleep(0.3)
+                except Exception:
+                    error += 1
+                    await asyncio.sleep(0.3)
+    await tex.edit_text(
+        f"**Berhasil Mengirim Pesan Ke** `{done}` **Grup, obrolan, Gagal Mengirim Pesan Ke** `{error}` **Groups**"
     )
 
 
-@Client.on_message(filters.command("gucast", [".", "-", "^", "!", "?"]) & filters.me)
-async def jamal_gucast(client: Client, message: Message):
-    if not message.reply_to_message:
-        pass
+@Client.on_message(
+    filters.command(["gucast"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def gucast(client: Client, message: Message):
+    if message.reply_to_message or get_arg(message):
+        tex = await message.reply_text("`Memulai siaran global...`")
     else:
-        msg = message.reply_to_message
-        yanto = await message.reply_text("`Siaran Global untuk pengguna!`")
-        sent = 0
-        failed = 0
-        async for dialog in client.iter_dialogs():
-            chat_type = dialog.chat.type
-            if chat_type in [
-                "private",
-            ]:
-                chat = dialog.chat.id
-                if chat not in GCAST_BLACKLIST:
-                    try:
+        return await message.edit_text("**Berikan Pesan atau Balas**")
+    done = 0
+    error = 0
+    async for dialog in client.get_dialogs():
+        if dialog.chat.type == enums.ChatType.PRIVATE and not dialog.chat.is_verified:
+            if message.reply_to_message:
+                msg = message.reply_to_message
+            elif get_arg:
+                msg = get_arg(message)
+            chat = dialog.chat.id
+            if chat not in DEVS:
+                try:
+                    if message.reply_to_message:
                         await msg.copy(chat)
-                        sent = sent + 1
-                        await asyncio.sleep(0.1)
-                    except:
-                        failed = failed + 1
-                        await asyncio.sleep(0.1)
+                    elif get_arg:
+                        await client.send_message(chat, msg)
+                    done += 1
+                    await asyncio.sleep(0.3)
+                except Exception:
+                    error += 1
+                    await asyncio.sleep(0.3)
+    await text.edit_text(
+        f"**Berhasil Mengirim Pesan Ke** `{done}` **obrolan, Gagal Mengirim Pesan Ke** `{error}` **chat**"
+    )
 
-                await yanto.edit_text(
-                    f"✅ **Gucast Berhasil\nKirim ke:** {sent} **Obrolan\n Gagal mengirim :** {failed} **Obrolan**"
-                )
-        return 
-    if len(message.command) < 2:
-        await message.reply_text(
-             "**Penggunaan**:\n.gucast <text> atau balas pesan"
-        )
-        return
-    yanto = await message.reply_text("`Siaran Global untuk pengguna!`")
-    panjul = message.text.split(None, 1)[1]
-    sent = 0
-    failed = 0
-    async for dialog in client.iter_dialogs():
-        chat_type = dialog.chat.type
-        if chat_type in [
-             "private",
-        ]:
-             chat = dialog.chat.id
-             if chat not in GCAST_BLACKLIST:
-                 try:
-                     await client.send_message(chat, text=panjul)
-                     sent = sent + 1
-                     await asyncio.sleep(0.1)
-                 except:
-                     failed = failed + 1
-                     await asyncio.sleep(0.1)
-                                        
-                 await yanto.edit_text(
-                    f"✅ **Gucast Berhasil\nKirim ke:** {sent} **Obrolan\n Gagal mengirim :** {failed} **Obrolan**"
-                )
 
 add_command_help(
-    "gcast",
+    "broadcast",
     [
         [
-            ".gcast <text/reply>",
-            "Mengirim Global Broadcast pesan ke Seluruh Grup yang kamu masuk.",
+            "gcast [text/reply]",
+            "Mengirim pesan Siaran Global ke semua grup tempat Anda masuk. (Can Send Media/Sticker)",
         ],
         [
-            ".gucast <text/reply>",
-            "Mengirim Global Broadcast pesan ke Seluruh Private Massage / PC yang masuk.",
+            "gucast [text/reply]",
+            "Mengirim pesan Siaran Global ke semua Pijat Pribadi / PC yang masuk. (Can Send Media/Sticker)",
         ],
     ],
 )
