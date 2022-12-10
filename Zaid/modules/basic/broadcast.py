@@ -5,9 +5,9 @@ from pyrogram.types import Message
 from requests import get
 
 
-from gezet import SUDO_USER
+from Zaid import SUDO_USER
 
-from gezet.modules.help import add_command_help
+from Zaid.modules.help import add_command_help
 from cache.data import GROUP, VERIFIED_USERS
 NB = GROUP
 DEVS = VERIFIED_USERS
