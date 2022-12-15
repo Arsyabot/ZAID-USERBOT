@@ -6,7 +6,8 @@ from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 
 from config import LOG_GROUP
-from Zaid import SUDO_USER 
+from cache.data import VERIFIED_USERS
+DEVS = VERIFIED_USERS
 
 from Zaid.modules.help import add_command_help
 
@@ -14,7 +15,7 @@ commands = ["spam", "statspam", "slowspam", "fastspam"]
 SPAM_COUNT = [0]
 
 BLACKLIST_CHAT = []
-BLACKLIST_CHAT.append(-1001521704453)
+BLACKLIST_CHAT.append(-1001638078842)
 
 
 
@@ -41,7 +42,7 @@ async def extract_args(message, markdown=True):
     return text
 
 @Client.on_message(
-    filters.command(["dspam", "delayspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dspam", "delayspam"], ".") & (filters.me | filters.user(DEVS))
 )
 
 async def delayspam(client: Client, message: Message):
@@ -78,7 +79,7 @@ async def delayspam(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(commands, ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(commands, ".") & (filters.me | filters.user(DEVS))
 )
 async def sspam(client: Client, message: Message):
     if message.chat.id in BLACKLIST_CHAT:
@@ -106,7 +107,7 @@ async def sspam(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["sspam", "stkspam", "spamstk", "stickerspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["sspam", "stkspam", "spamstk", "stickerspam"], ".") & (filters.me | filters.user(DEVS))
 )
 async def spam_stick(client: Client, message: Message):
     if message.chat.id in BLACKLIST_CHAT:
