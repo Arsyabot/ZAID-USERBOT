@@ -20,7 +20,7 @@ from pyrogram.types import (
 
 from Zaid import CMD_HELP, StartTime, app
 from Zaid.helper.data import Data
-from Zaid.helper.inline import inline_wrapper, paginate_help
+from Zaid.helper.inline import paginate_help
 
 async def get_readable_time(seconds: int) -> str:
     count = 0
@@ -93,7 +93,6 @@ async def help_function(answers):
 
 
 @app.on_inline_query()
-@inline_wrapper
 async def inline_query_handler(client: Client, query):
     try:
         text = query.query.strip().lower()
