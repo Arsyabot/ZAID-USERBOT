@@ -1,4 +1,4 @@
-from Zaid import app, robot
+from Zaid import app
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 async def start(client, message):
    await message.reply_text("Hey ALBY PYROBOT Assistant here")
 
-@robot.on_message(filters.command("startt") & filters.private)
+@app.on_message(filters.command("startt") & filters.private)
 async def start(_, message):
     await message.reply_photo(
         photo=f"https://telegra.ph/file/7b2a3fa167686dfaa3da8.jpg",
