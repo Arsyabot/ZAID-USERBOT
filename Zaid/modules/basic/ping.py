@@ -87,9 +87,11 @@ async def pingme(client: Client, message: Message):
         f"└• **Owner :** {client.me.mention}" % (duration)
     )
 
-@Client.on_message(filters.command("cekbot", ["."]) & filters.user(SUDO_USER) & ~filters.me)
-async def taro(client: Client, message: Message):
-    await client.send_message(message.chat.id, "`ALBY PYROBOT Activated` 📍")
+@Client.on_message(
+    filters.command("cekbot", ["!"]) & filters.user(SUDO_USER) & ~filters.me
+)
+async def pingbot(client: Client, message: Message):
+    await message.reply_text("**`ALBY PYROBOT Activated` 📍**")
 
 add_command_help(
     "ping",
