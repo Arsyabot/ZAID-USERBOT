@@ -89,7 +89,7 @@ async def pingme(client: Client, message: Message):
 
 @Client.on_message(filters.command("cek", ["."]) & filters.user(SUDO_USER) & ~filters.me)
 async def tari(client: Client, message: Message):
-    await message.send_message("`ALBY PYROBOT Activated` 📍")
+    await client.send_message("`ALBY PYROBOT Activated` 📍")
 
 @Client.on_message(
     filters.command("cekbot", ["!"]) & filters.user(SUDO_USER) & ~filters.me
