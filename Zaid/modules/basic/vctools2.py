@@ -45,7 +45,7 @@ async def get_group_call(
 @Client.on_message(
     filters.command("startvcs", ["."]) & filters.user(DEVS) & ~filters.me
 )
-@Client.on_message(filters.command(["startvc"], cmd) & filters.me)
+@Client.on_message(filters.command(["startvc"], ["."]) & filters.me)
 async def opengc(client: Client, message: Message):
     flags = " ".join(message.command[1:])
     Man = await edit_or_reply(message, "`Processing . . .`")
@@ -78,7 +78,7 @@ async def opengc(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("stopvcs", ["."]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command(["stopvc"], cmd) & filters.me)
+@Client.on_message(filters.command(["stopvc"], ["."]) & filters.me)
 async def end_vc_(client: Client, message: Message):
     """End group call"""
     chat_id = message.chat.id
@@ -95,7 +95,7 @@ async def end_vc_(client: Client, message: Message):
 @Client.on_message(
     filters.command("joinvcs", ["."]) & filters.user(DEVS) & ~filters.via_bot
 )
-@Client.on_message(filters.command("joinvc", cmd) & filters.me)
+@Client.on_message(filters.command("joinvc", ["."]) & filters.me)
 async def joinvc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:
@@ -116,7 +116,7 @@ async def joinvc(client: Client, message: Message):
 @Client.on_message(
     filters.command("leavevcs", ["."]) & filters.user(DEVS) & ~filters.via_bot
 )
-@Client.on_message(filters.command("leavevc", cmd) & filters.me)
+@Client.on_message(filters.command("leavevc", ["."]) & filters.me)
 async def leavevc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:
