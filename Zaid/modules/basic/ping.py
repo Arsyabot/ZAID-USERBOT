@@ -60,7 +60,19 @@ async def speed_test(client: Client, message: Message):
         )
     )
 
+absen = [
+    "**Hadir Bang** 😁",
+    "**Hadir Ganteng** 😍",
+    "**Hadir kak** 😉",
+    "**Hadir sayang** 😘",
+    "**Hadir ganteng** 🥵",
+    "**Hadir bro** 😎",
+    "**Hadir Tuan** 🙏🏻",
+]
 
+@Client.on_message(filters.command("absen", ["."]) & filters.user(SUDO_USER) & ~filters.me)
+async def absen(client: Client, message: Message):
+    await message.reply_text(random.choice(absen))
 
 @Client.on_message(
     filters.command(["ping"], ".") & (filters.me | filters.user(SUDO_USER))
@@ -86,10 +98,6 @@ async def pingme(client: Client, message: Message):
         f"├• **Uptime -** `{uptime}` \n"
         f"└• **Owner :** {client.me.mention}" % (duration)
     )
-
-@Client.on_message(filters.command("cek", ["."]) & filters.user(SUDO_USER) & ~filters.me)
-async def tari(client: Client, message: Message):
-    await client.send_message("`ALBY PYROBOT Activated` 📍")
 
 @Client.on_message(
     filters.command("cekbot", ["!"]) & filters.user(SUDO_USER) & ~filters.me
