@@ -17,23 +17,7 @@ if ALIVE_TEXT:
    txt = ALIVE_TEXT
 else:
     txt = (
-    capt = (
-        f"✘ <b> [ALBY-PYROBOT](https://github.com/PunyaAlby/ALBY-Pyrobot) is Up and Running. </b>\n\n"
-        f"✘ <b>ALBY-PYROBOT 🐍</b>\n"
-        f"◈ ━━━━━━ ◆ ━━━━━━ ◈\n"
-        f"✘ <b>Master: </b> {client.me.mention} \n"
-        f"✘ <b>Modules: </b> <code>{len(modules)} Modules</code> \n"
-        f"✘ <b>Bot Version: </b> <code>{BOT_VER}</code> \n"
-        f"✘ <b>Python Version: </b> <code>{python_version()}</code> \n"
-        f"✘ <b>Pyrogram Version: </b> <code>{versipyro}</code> \n"
-        f"✘ <b>Bot Uptime :</b> <code>{uptime}</code> \n"
-        f"　  (\︵/) \n"
-        f"　⫺( •ᆺ•)⫹ \n"
-        f"┏━∪ ━━━━━━━━━━━\n"
-        f"╏<b>[𝗦𝘂𝗽𝗽𝗼𝗿𝘁](https://t.me/ruangdiskusikami)</b> & <b>[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/ruangprojects)</b>\n"
-        f"┗━━━━━━━━━━━━━"
-    )
-        f"** ✘ zαι∂ υѕєявσт ✘**\n\n"
+        f"** ✘ ALBY-PYROBOT ✘**\n\n"
         f"❏ **νєяѕισи**: `2.1`\n"
         f"├• **υρтιмє**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"├• **ρутнσи**: `{python_version()}`\n"
