@@ -17,14 +17,32 @@ if ALIVE_TEXT:
    txt = ALIVE_TEXT
 else:
     txt = (
+    capt = (
+        f"✘ <b> [ALBY-PYROBOT](https://github.com/PunyaAlby/ALBY-Pyrobot) is Up and Running. </b>\n\n"
+        f"✘ <b>ALBY-PYROBOT 🐍</b>\n"
+        f"◈ ━━━━━━ ◆ ━━━━━━ ◈\n"
+        f"✘ <b>Master: </b> {client.me.mention} \n"
+        f"✘ <b>Modules: </b> <code>{len(modules)} Modules</code> \n"
+        f"✘ <b>Bot Version: </b> <code>{BOT_VER}</code> \n"
+        f"✘ <b>Python Version: </b> <code>{python_version()}</code> \n"
+        f"✘ <b>Pyrogram Version: </b> <code>{versipyro}</code> \n"
+        f"✘ <b>Bot Uptime :</b> <code>{uptime}</code> \n"
+        f"　  (\︵/) \n"
+        f"　⫺( •ᆺ•)⫹ \n"
+        f"┏━∪ ━━━━━━━━━━━\n"
+        f"╏<b>[𝗦𝘂𝗽𝗽𝗼𝗿𝘁](https://t.me/ruangdiskusikami)</b> & <b>[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/ruangprojects)</b>\n"
+        f"┗━━━━━━━━━━━━━"
+    )
         f"** ✘ zαι∂ υѕєявσт ✘**\n\n"
         f"❏ **νєяѕισи**: `2.1`\n"
         f"├• **υρтιмє**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"├• **ρутнσи**: `{python_version()}`\n"
-        f"├• **ρуяσgяαм**: `{__version__}`\n"
-        f"├• **ѕυρρσят**: [Click](t.me/TheSupportChat)\n"
-        f"├• **¢нαииєℓ**: [Click](t.me/TheUpdatesChannel)\n"
-        f"└• **яєρσ**: [Click](https://GitHub.com/itz-zaid/Zaid-Userbot)"        
+        f"└• **ρуяσgяαм**: `{__version__}`\n"
+        f"　  (\︵/) \n"
+        f"　⫺( •ᆺ•)⫹ \n"
+        f"┏━∪ ━━━━━━━━━━━\n"
+        f"╏<b>[𝗦𝘂𝗽𝗽𝗼𝗿𝘁](https://t.me/ruangdiskusikami)</b> & <b>[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/ruangprojects)</b>\n"
+        f"┗━━━━━━━━━━━━━"       
     )
 
 @Client.on_message(
@@ -51,18 +69,10 @@ async def alive(client: Client, message: Message):
     except BaseException:
         await xx.edit(xd, disable_web_page_preview=True)
 
-@Client.on_message(filters.command("repo", ".") & filters.me)
-async def repo(bot: Client, message: Message):
-    await message.edit("⚡")
-    await asyncio.sleep(1)
-    await message.edit("Fetching Source Code.....")
-    await asyncio.sleep(1)
-    await message.edit("Here is repo: \n\n\nhttps://github.com/itz-zaid/Zaid-UserBot\nFork & Give an ⭐")
-
 
 @Client.on_message(filters.command("creator", ".") & filters.me)
 async def creator(bot: Client, message: Message):
-    await message.edit("https://gitHub.com/itz-zaid")
+    await message.edit("https://t.me/punya_alby")
 
 
 @Client.on_message(filters.command(["uptime", "up"], ".") & filters.me)
