@@ -88,19 +88,3 @@ async def end_vc_(client: Client, message: Message):
     await message.reply_text(f"Ended group call in **Chat ID** : `{chat_id}`")
 
 
-add_command_help(
-    "vctools",
-    [
-        ["startvc", "Untuk Memulai voice chat group."],
-        ["stopvc", "Untuk Memberhentikan voice chat group."],
-        [
-            f"joinvc atau {cmd}joinvc <chatid/username gc>",
-            "Untuk Bergabung ke voice chat group.",
-        ],
-        [
-            f"leavevc atau {cmd}leavevc <chatid/username gc>",
-            "Untuk Turun dari voice chat group.",
-        ],
-    ],
-)
-
