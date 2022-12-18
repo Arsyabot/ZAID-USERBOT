@@ -21,6 +21,7 @@ from pyrogram.types import Message
 
 from Zaid.helper.basic import edit_or_reply
 from Zaid.helper.tools import get_arg
+from Zaid.modules.help import add_command_help
 from cache.data import VERIFIED_USERS
 DEVS = VERIFIED_USERS
 
@@ -133,3 +134,20 @@ async def leavevc(client: Client, message: Message):
     if chat_id:
         msg += f"\n└ **Chat ID:** `{chat_id}`"
     await Man.edit(msg)
+
+add_command_help(
+    "vctools",
+    [
+        [".startvc", "Untuk Memulai voice chat group."],
+        [".stopvc", "Untuk Memberhentikan voice chat group."],
+        [
+            f".joinvc atau .joinvc <chatid/username gc>",
+            "Untuk Bergabung ke voice chat group.",
+        ],
+        [
+            f".leavevc atau .leavevc <chatid/username gc>",
+            "Untuk Turun dari voice chat group.",
+        ],
+    ],
+)
+
