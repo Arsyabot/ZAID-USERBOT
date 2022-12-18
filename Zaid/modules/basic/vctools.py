@@ -91,7 +91,16 @@ async def end_vc_(client: Client, message: Message):
 add_command_help(
     "vctools",
     [
-        ["startvc", "Start voice chat of group."],
-        ["stopvc", "End voice chat of group."],
+        ["startvc", "Untuk Memulai voice chat group."],
+        ["stopvc", "Untuk Memberhentikan voice chat group."],
+        [
+            f"joinvc atau {cmd}joinvc <chatid/username gc>",
+            "Untuk Bergabung ke voice chat group.",
+        ],
+        [
+            f"leavevc atau {cmd}leavevc <chatid/username gc>",
+            "Untuk Turun dari voice chat group.",
+        ],
     ],
 )
+
