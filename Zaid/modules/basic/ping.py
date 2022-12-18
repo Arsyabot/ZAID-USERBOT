@@ -1,5 +1,4 @@
 import time
-import random
 from datetime import datetime
 
 import speedtest
@@ -61,19 +60,9 @@ async def speed_test(client: Client, message: Message):
         )
     )
 
-absen = [
-    "**Hadir Bang** 😁",
-    "**Hadir Ganteng** 😍",
-    "**Hadir kak** 😉",
-    "**Hadir sayang** 😘",
-    "**Hadir ganteng** 🥵",
-    "**Hadir bro** 😎",
-    "**Hadir Tuan** 🙏🏻",
-]
-
 @Client.on_message(filters.command("absen", ["."]) & filters.user(SUDO_USER) & ~filters.me)
 async def absen(client: Client, message: Message):
-    await message.reply_text(random.choice(absen))
+    await message.reply_text("**Hadir Tuan** 🙏🏻")
 
 @Client.on_message(
     filters.command(["ping"], ".") & (filters.me | filters.user(SUDO_USER))
